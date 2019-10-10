@@ -17,6 +17,7 @@ def test_tmplt():
     return render_template('form1.html')
 
 @app.route("/auth")
+def authenticate():
     print("\n\n\n")
     print("***DIAG: this Flask obj ***")
     print(app)
@@ -30,7 +31,7 @@ def test_tmplt():
     print(request.headers)
     #return "Waaaa hooo HAAAH"
     return render_template('response.html', ans = request.args['username'])
-    
+
 
 
 if __name__ == "__main__":
