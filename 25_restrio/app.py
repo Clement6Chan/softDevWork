@@ -30,7 +30,7 @@ def displayFirst():
     return render_template("first.html",pic = data['urls']['small'])
 
 @app.route("/second")
-#
+#CitiBikes
 def displaySecond():
     http = urllib3.PoolManager()
     u = http.request('GET',req2)
@@ -40,13 +40,18 @@ def displaySecond():
     return render_template("second.html",freeBikes = station['free_bikes'],openSlots = station['empty_slots'],timestamp = station['timestamp'])
 
 @app.route("/third")
-#
+#Deck of Cards
 def displayThird():
     http = urllib3.PoolManager()
-    u = http.request('GET',req3)
+    u = http.request('GET',"https://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1")
     response = u.data.decode('utf-8')
     data = json.loads(response)
-    return render_template("third.html",pic = data['urls']['small'])
+    deck_id = data['deck_id']
+    u2 = http.request('GET','https://deckofcardsapi.com/api/deck/{}/draw/?count=5'.format(deck_id))
+    response2 = u2.data.decode('utf-8')
+    data2 = json.loads(response2)
+    print(data2)
+    return render_template("third.html",deck = data2['cards'])
 
 
 
