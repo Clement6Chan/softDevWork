@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+        h3 {
+            color: darkgreen
+        }
+
+        .secContent {
+            padding-left: 2%;
+            padding-right: 2%;
+        }
+
+        img {
+            width: 100%;
+            padding: 1%;
+        }
+    </style>
+</head>
+<body style="padding: 2%; background-color: lightskyblue;">
+<div id="titleBlock" class="text-center">
+    <h1 class="display-3">VBA: Visual Basic for Applications</h1>
+    <h2 class="text-primary">Clement Chan and Henry Liu</h2>
+    <h6>Team Football</h6>
+</div>
+
+<div id="slide2">
+    <h3 class="shadow p-3 mb-3 rounded">What is VBA</h3>
+    <div class="secContent">
+        <p>
+            Visual Basic for Applications is a programming language used for Excel and other Microsoft Office
+            applications. Its
+            syntax is similar to python, however unlike python, VBA can only be run within a host application.
+        <p>
+
+    </div>
+</div>
+
+<div id="slide3">
+    <h3 class="shadow p-3 mb-3 rounded">History of VBA</h3>
+    <div class="secContent">
+        <ul>
+            <li>Evolved from Microsoft Basic (1975)</li>
+            <li>UI initially developed by Alan Cooper</li>
+            <li>1993—VBA launched with Microsoft Excel</li>
+            <li>VBA 4.0 (1997) written in C++ became object-oriented</li>
+        </ul>
+    </div>
+</div>
+
+<div id="slide4">
+    <h3 class="shadow p-3 mb-3 rounded">How VBA works</h3>
+    <div class="secContent">
+        <p> VBA programs are executed in macros which are automated tasks/actions that are programmable. There are
+            two ways to make a macro.
+        <ul>
+            <li>Recording a macro</li>
+            <li>Writing a macro</li>
+        </ul>
+    </div>
+</div>
+
+<div id="slide5-6">
+    <h3 class="shadow p-3 mb-3 rounded">Why VBA?</h3>
+    <div class="secContent">
+        <p> VBA is widely used since it is easy to use and is compatible with programs that don't require a computer
+            science to understand.
+        <p>
+        <p>What are things we can automate using VBA?
+        <p>
+        <ul>
+            <li>Order lists</li>
+            <li>Used for budgeting and forecasting</li>
+            <li>Analyzing data</li>
+            <li>Creating invoices</li>
+            <li>Developing charts</li>
+        </ul>
+
+    </div>
+</div>
+
+<div id="codeSnippet">
+    <h3 class="shadow p-3 mb-3 rounded">Writing a macro to change the background color of cells in column 1</h3>
+    <div class="secContent">
+        <div style="background: white; overflow:auto;border: 5px solid gray;padding:5px;">
+<pre style="margin: 0; line-height: 125%">
+    Sub sbPrintColorIndexColors()
+    Dim iCntr
+    For iCntr = 1 To 56
+        Cells(iCntr, 1).Interior.ColorIndex = iCntr
+        Cells(iCntr, 1) = iCntr
+    Next iCntr
+    End Sub
+</pre>
+        </div>
+        <br>
+        <p><b>Instructions</b></p>
+        <ol>
+            <li>Open an excel workbook</li>
+            <li>Press Alt+F11 to open VBA Editor</li>
+            <li>Insert a new module from Insert menu</li>
+            <li>Copy the above code and Paste in the code window</li>
+            <li>Save the file as macro enabled workbook</li>
+            <li>Press F5 to execute the procedure</li>
+            <li>You can see the interior colors are changing as per our code</li>
+        </ol>
+        <img id="before" src="img/before.png"
+             alt="before">
+        <img id="after" src="img/after.png"
+             alt="after">
+    </div>
+</div>
+
+<div id="codeSnippet2">
+    <h3 class="shadow p-3 mb-3 rounded">Writing a macro to insert multiple rows</h3>
+    <div class="secContent">
+        <div style="background: white; overflow:auto;border: 5px solid gray;padding:5px;">
+<pre style="margin: 0; line-height: 125%">
+    Sub InsertMultipleRows()
+    Dim i As Integer
+    Dim j As Integer
+    ActiveCell.EntireRow.Select
+    On Error GoTo Last
+    i = InputBox(&quot;Enter number of columns to insert&quot;, &quot;Insert Columns&quot;)
+    For j = 1 To i
+    Selection.Insert Shift:=xlToDown, CopyOrigin:=xlFormatFromRightorAbove
+    Next j
+    Last: Exit Sub
+    End Sub
+</pre>
+        </div>
+        <p><b>Follow the same instructions as above, but use this code instead.</b></p>
+    </div>
+</div>
+
+<div id="slide10">
+    <h3 class="shadow p-3 mb-3 rounded">How to record a macro</h3>
+    <div class="secContent">
+        <p><b>Instructions</b></p>
+        <p></p>
+        <ol>
+            <li>On the View tab, in the Macros group, click the Macros button and then choose Record Macro</li>
+            <li>In the Record Macro dialog box, enter a name (such as Macro1) in the Macro Name box</li>
+            <li>Perform whatever tasks you would like the macro to perform</li>
+            <li>Stop recording once done</li>
+            <li>Run the macro as you would with any other macro</li>
+        </ol>
+    </div>
+</div>
+
+
+<!--<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"-->
+<!--        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"-->
+<!--        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"-->
+<!--        crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"-->
+<!--        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"-->
+<!--        crossorigin="anonymous"></script>-->
+</body>
+</html>
