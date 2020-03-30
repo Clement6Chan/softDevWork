@@ -18,9 +18,9 @@ function draw(e) {
     y=e.clientY-8;
     console.log(x + ",", y);
     console.log(clickedDot);
-    if(!clickedDot){
+    //if(!clickedDot){
         addDot(x,y)
-    }
+    //}
 }
 
 function boop(e){
