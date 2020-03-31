@@ -21,6 +21,7 @@ function plot(e) {
             dot.setAttribute("fill", "blue");
             dot.setAttribute('dx', 1);
             dot.setAttribute('dy', 1);
+            dot.setAttribute('prevColor','blue');
             dot.addEventListener("click", doot);
             pic.appendChild(dot);
         }
@@ -29,6 +30,7 @@ function plot(e) {
 function doot(e) {
     if (this.getAttribute('fill') == 'blue') {
         this.setAttribute('fill', 'cyan');
+        this.setAttribute('prevColor','cyan');
     } else if (this.getAttribute('fill') == 'cyan') {
         createRandom(e);
         this.remove();
@@ -49,12 +51,14 @@ function createRandom(e) {
     dot.setAttribute("fill", "blue");
     dot.setAttribute('dx', 1);
     dot.setAttribute('dy', 1);
+    dot.setAttribute('prevColor','blue');
     dot.addEventListener("click", doot);
     pic.appendChild(dot);
 };
 function startAnim(e) {
     if (running == false) {
         document.getElementById('stop').style.visibility = "visible";
+        document.getElementById('xtra').style.visibility = "hidden";
         timeStart = e.timeStamp;
         console.log(timeStart);
         console.log("start");
@@ -67,10 +71,13 @@ function startAnim(e) {
 function stopAnim(e) {
     if (running == true) {
         document.getElementById('stop').style.visibility = "hidden";
+        document.getElementById('move').style.visibility = "visible";
+        document.getElementById('xtra').style.visibility = "visible";
         console.log("stop");
         cancelAnimationFrame(reqId)
         offset = (e.timeStamp + offset - timeStart)
         running = false;
+        resetColors()
     } else {
         console.log('already stopped')
     }
@@ -102,6 +109,7 @@ function propulsion(e) {
 function crazy(e){
     if (running == false) {
         document.getElementById('stop').style.visibility = "visible";
+        document.getElementById('move').style.visibility = "hidden";
         timeStart = e.timeStamp;
         console.log(timeStart);
         console.log("start");
@@ -112,7 +120,37 @@ function crazy(e){
     }
 }
 function mario(e){
+    var dots = pic.childNodes;
+    colors = ["red","orange","yellow","green","blue","black","purple","pink","blue","black","white","black"]
+    for (var i = 1; i <= pic.childElementCount; i++) {
+        var x = parseInt(dots[i].getAttribute("cx"));
+        var y = parseInt(dots[i].getAttribute("cy"));
+        if (x === 20 || x === parseInt(pic.getAttribute("width")) - 20) {
+            // inc_x *= -1;
+            dots[i].setAttribute('dx', parseInt(dots[i].getAttribute('dx')) * -1);
+        }
+        if (y === 20 || y === parseInt(pic.getAttribute("height")) - 20) {
+            // inc_y *= -1;
+            dots[i].setAttribute('dy', parseInt(dots[i].getAttribute('dy')) * -1);
+        }
+        // console.log("");
+        // console.log(x);
+        // console.log(dots[i].getAttribute('dx'));
+        x += parseInt(dots[i].getAttribute('dx'));
+        y += parseInt(dots[i].getAttribute('dy'));
+        color = colors[y % 11]
+        dots[i].setAttribute("cx", x);
+        dots[i].setAttribute("cy", y);
+        dots[i].setAttribute("fill", color);
+        // console.log(x);
+    }
     reqId = window.requestAnimationFrame(mario);
+}
+function resetColors(e){
+    var dots = pic.childNodes;
+    for (var i = 1; i <= pic.childElementCount; i++) {
+        dots[i].setAttribute('fill',dots[i].getAttribute('prevColor'));
+    }
 }
 function rollCall() {
     var dots = pic.childNodes;
