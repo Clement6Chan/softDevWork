@@ -11,7 +11,7 @@ var offset = 0;
 var running = false;
 
 var logo = new Image();
-logo.src = "logo_dvd.png";
+logo.src = "dvd.png";
 
 const logoWidth = 120;
 const logoHeight = 100;
