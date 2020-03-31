@@ -1,52 +1,32 @@
-var pic = document.getElementById("vimage");
-pic.addEventListener('click', draw);
-var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
-c.setAttribute("cx", 0);
-c.setAttribute("cy", 0);
-c.setAttribute("r", 100);
-c.setAttribute("fill", "rect");
-c.setAttribute("stroke", "black");
+var button = document.getElementById('clear');
+var pic = document.getElementById('vimage');
 
+var plot = function(e) {
+    var c = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    if(e.target.getAttribute("id") == "vimage"){
+  	     c.setAttribute("cx", e.clientX-8);
+         c.setAttribute("cy", e.clientY-8);
+         c.setAttribute("r", 20);
+  	     c.setAttribute("fill", "blue");
+		     c.addEventListener("click", doot)
+  	     pic.appendChild(c);
+    }
+};
 
-var counter=0;
-var clickedDot = false;
-
-function draw(e) {
-    console.log(clickedDot);
-    x=e.clientX-8;
-    y=e.clientY-8;
-    console.log(x + ",", y);
-    console.log(clickedDot);
-    //if(!clickedDot){
-        addDot(x,y)
-    //}
-}
-
-function boop(e){
+var doot = function(e){
     clickedDot=true;
     console.log(this.getAttribute("id"));
     if(this.getAttribute('fill') == 'blue'){
-        this.setAttribute('fill','lightBlue');
+        this.setAttribute('fill','cyan');
     }
-    else if(this.getAttribute('fill') == 'lightBlue'){
-        addDotRand(e);
+    else if(this.getAttribute('fill') == 'cyan'){
+        moveRandom(e);
         this.remove();
     }
-}
+};
 
-function addDot(x,y){
-    var dot = document.createElementNS("http://www.w3.org/2000/svg",'circle');
-    dot.setAttribute("cx",x);
-    dot.setAttribute("cy",y);
-    dot.setAttribute("r",20);
-    dot.setAttribute("fill","blue");
-    dot.setAttribute("id",counter);
-    pic.appendChild(dot);
-    counter++;
-    dot.addEventListener('click',boop);
-}
-function addDotRand(e){
+var moveRandom = function(e){
     x=Math.floor((Math.random() * 500));
     y=Math.floor((Math.random() * 500));
     var dot = document.createElementNS("http://www.w3.org/2000/svg",'circle');
@@ -54,9 +34,15 @@ function addDotRand(e){
     dot.setAttribute("cy",y);
     dot.setAttribute("r",20);
     dot.setAttribute("fill","blue");
-    dot.setAttribute("id",counter);
     pic.appendChild(dot);
-    counter++;
-    dot.addEventListener('click',boop);
-}
+    dot.addEventListener('click',doot);
+};
 
+var clear = function(e) {
+    while (pic.lastChild) {
+        pic.removeChild(pic.lastChild);
+    }
+};
+
+button.addEventListener("click", clear);
+pic.addEventListener("click", plot)
