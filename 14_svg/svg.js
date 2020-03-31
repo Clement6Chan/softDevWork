@@ -1,6 +1,6 @@
 document.getElementById('clear').addEventListener("click", clear);
 document.getElementById('move').addEventListener("click", startAnim);
-document.getElementById('xtra').addEventListener("click", clear);
+document.getElementById('xtra').addEventListener("click", crazy);
 document.getElementById('stop').addEventListener("click", stopAnim);
 var pic = document.getElementById('vimage');
 pic.addEventListener("click", plot);
@@ -26,7 +26,6 @@ function plot(e) {
         }
     }
 };
-
 function doot(e) {
     if (this.getAttribute('fill') == 'blue') {
         this.setAttribute('fill', 'cyan');
@@ -35,7 +34,11 @@ function doot(e) {
         this.remove();
     }
 };
-
+function clear(e) {
+    while (pic.lastChild) {
+        pic.removeChild(pic.lastChild);
+    }
+};
 function createRandom(e) {
     rx = Math.floor((Math.random() * 458)) + 21;
     ry = Math.floor((Math.random() * 458)) + 21;
@@ -49,16 +52,9 @@ function createRandom(e) {
     dot.addEventListener("click", doot);
     pic.appendChild(dot);
 };
-
-function clear(e) {
-    while (pic.lastChild) {
-        pic.removeChild(pic.lastChild);
-    }
-};
-
 function startAnim(e) {
-    document.getElementById('stop').style.visibility = "visible";
     if (running == false) {
+        document.getElementById('stop').style.visibility = "visible";
         timeStart = e.timeStamp;
         console.log(timeStart);
         console.log("start");
@@ -68,10 +64,9 @@ function startAnim(e) {
         console.log("already running")
     }
 }
-
 function stopAnim(e) {
-    document.getElementById('stop').style.visibility = "hidden";
     if (running == true) {
+        document.getElementById('stop').style.visibility = "hidden";
         console.log("stop");
         cancelAnimationFrame(reqId)
         offset = (e.timeStamp + offset - timeStart)
@@ -80,7 +75,6 @@ function stopAnim(e) {
         console.log('already stopped')
     }
 }
-
 function propulsion(e) {
     var dots = pic.childNodes;
     for (var i = 1; i <= pic.childElementCount; i++) {
@@ -105,7 +99,21 @@ function propulsion(e) {
     }
     reqId = window.requestAnimationFrame(propulsion);
 }
-
+function crazy(e){
+    if (running == false) {
+        document.getElementById('stop').style.visibility = "visible";
+        timeStart = e.timeStamp;
+        console.log(timeStart);
+        console.log("start");
+        requestAnimationFrame(mario);
+        running = true;
+    } else {
+        console.log("already running")
+    }
+}
+function mario(e){
+    reqId = window.requestAnimationFrame(mario);
+}
 function rollCall() {
     var dots = pic.childNodes;
     for (var i = 1; i <= pic.childElementCount; i++) {
