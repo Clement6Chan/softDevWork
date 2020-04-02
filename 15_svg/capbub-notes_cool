@@ -1,0 +1,39 @@
+Clement Chan & Henry Liu
+SoftDev1 pd1
+K15 -- SVG
+2020-04-01
+
+Sample 1
+Hypothesis:
+- When clicking a cell, an alert will be displayed
+
+Conclusion:
+- Hypothesis correct
+
+
+Sample 2
+Hypothesis:
+- inner HTML will be in the order of table, tr, and then td
+Conclusion:
+- Order actually went like this: td, tr, table
+
+Q: The order appears in td, tr, then table
+
+
+Sample 3
+Hypothesis:
+-The same thing as Sample 2 will happen
+Conclusion:
+-The table comes first instead
+
+Q: the uncommented line will stop the display of td and tr (no “true”)
+Q: The order appears in Table, td, then tr
+
+Sample 4
+Hypothesis:
+- the order will return to td,tr,table
+Conclusion:
+-Adding “true” to multiple event listeners reverses the order they are triggered
+-Adding a “true” to an event listener appears to prioritize it over those without a “true”, e.stopPropagation does not skip over “true”, it just allows the first event
+
+Q: the order the event listeners are added do not matter
