@@ -74,7 +74,7 @@ for year in count:
          {'name': '45-64', 'value': 0}, {'name': '65+', 'value': 0}, {'name': 'UNKNOWN', 'value': 0}],
 
         [{'name': 'WHITE', 'value': 0}, {'name': 'BLACK', 'value': 0}, {'name': 'WHITE HISPANIC', 'value': 0},
-         {'name': 'BLACK HISPANIC', 'value': 0}, {'name': 'PACIFIC ISLANDER', 'value': 0},
+         {'name': 'BLACK HISPANIC', 'value': 0}, {'name': 'ASIAN', 'value': 0},
          {'name': 'UNKNOWN', 'value': 0}],
 
         [{'name': '<18', 'value': 0}, {'name': '18-24', 'value': 0}, {'name': '25-44', 'value': 0},
